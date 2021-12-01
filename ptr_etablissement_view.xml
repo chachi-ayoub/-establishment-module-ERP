@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		 <menuitem id="main_menu_etablissement" name="Patrimoines"/> 
+		 <record id="ptr_etablissement_form_view" model="ir.ui.view">
+            <field name="name">ptr.etablissement.form</field>
+            <field name="model">ptr.etablissement</field>
+            <field name="arch" type="xml">
+                <form string="Etablissement" version="7.0">
+					<sheet>
+						<notebook >
+							<page string="Informations etablissement">
+								<group>
+									<field name="name"/>
+									<field name="adresse"/>
+									<field name="fixe"/>
+									<field name="faxe"/>
+									<field name="departement_ids"/>
+									<field name="inv_ids"/>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="ptr.etablissement_tree">
+            <field name="name">ptr.etablissement.tree</field>
+            <field name="model">ptr.etablissement</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Infos Etablissement">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="adresse"/>
+                    <field name="faxe"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="action_etablissement_seq">
+            <field name="name">action etablissement</field>
+            <field name="res_model">ptr.etablissement</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+   
+       <menuitem name="Etablissement" id="section_main_menu_etablissement" parent="main_menu_etablissement" />
+        <menuitem name="Sous-menu etablissement" id="real_menu_etablissement" parent="section_main_menu_etablissement" action="action_etablissement_seq"/>
+		
+    </data>
+</openerp>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+		 <menuitem id="main_menu_inventaire" name="Menu Inventaire"/> 
+		 <record id="ptr_inventaire_form_view" model="ir.ui.view">
+            <field name="name">ptr.inventaire.form</field>
+            <field name="model">ptr.inventaire</field>
+            <field name="arch" type="xml">
+                <form string="Inventaire" version="7.0">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="" />
+                    <button name='redaction_pv_lancement' string="Redaction du pv de lancement" states="draft" type="workflow"/>
+                    <button name="signature_courrier" string="Validation et signature du courrier" states="redaction_pv_lancement" class="oe_highlight" type="workflow" />
+                    <button name="designation_equipe" string="Designation de l equipe d inventaire" states="signature_courrier" class="oe_highlight" type="workflow" />
+                    <button name="maj_plan_action" string="MAJ plan d action" states="designation_equipe" class="oe_highlight" type="workflow" />
+                    <button name="diffusion_rpe" string="Diffusion RPE" states="maj_plan_action" class="oe_highlight" type="workflow" />
+                    <button name="pv_reunion_ouverture" string="PV de reunion ouverture" states="diffusion_rpe" class="oe_highlight" type="workflow" />
+                    <button name="demarrage_inventaire" string="Demarrage inventaire" states="pv_reunion_ouverture" class="oe_highlight" type="workflow" />
+                </header>
+					<sheet>
+						<notebook >
+							<page string="Informations inventaire">
+								<group>
+									<field name="name"/>
+									<field name="date_inv_dec"/>
+									<field name="date_inv_ar"/>
+									<field name="duree"/>
+									<field name="idi_nv"/>
+								</group>
+							</page>
+						</notebook>
+					</sheet>
+				</form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="ptr.inventaire_tree">
+            <field name="name">ptr.inventaire.tree</field>
+            <field name="model">ptr.inventaire</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Infos inventaire">
+                    <field name="name"/>
+                    <field name="date_inv_dec"/>
+                    <field name="date_inv_ar"/>
+                    <field name="duree"/>
+                    <field name="idi_nv"/>
+				
+
+                </tree>
+            </field>
+        </record>
+            <record id="ptr_inv_graph" model="ir.ui.view">
+            <field name="name">ptr.inventaire.graph</field>
+            <field name="model">ptr.inventaire</field>
+            <field name="arch" type="xml">
+            <graph string="Statistique des inventaires" type="bar">
+                <field name="name" />
+                <field name="duree" operator="+"/>
+            </graph>
+            </field>
+        </record>
+        <record id="ptr_inv_calendar" model="ir.ui.view">
+            <field name="name">ptr.inventaire.calendar</field>
+            <field name="model">ptr.inventaire</field>
+            <field name="arch" type="xml">
+            <calendar color="name" date_delay="duree"  date_start="date_inv_dec" string="Inventaire" mode="week">
+            <field name="name"/>
+            <field name="date_inv_dec"/>
+            </calendar>
+            </field>
+            </record>
+        <record id="ptr_inv_gantt" model="ir.ui.view">
+            <field name="name">ptr.inventaire.gantt</field>
+            <field name="model">ptr.inventaire</field>
+            <field name="arch" type="xml">
+            <gantt string="Inventaires" date_delay="duree" date_start="date_inv_dec" color="name">
+            <field name="name"/>
+            <field name="date_inv_dec"/>
+            </gantt>
+            </field>
+        
+        </record>
+        <record model="ir.actions.act_window" id="action_inventaire_seq">
+            <field name="name">action inventaire</field>
+            <field name="res_model">ptr.inventaire</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,graph,calendar,gantt</field>
+        </record>
+        
+        
+        <record model="ir.ui.view"  id="ptr_inv_search_view" >
+            <field name="name">ptr.inventaire.search</field>
+            <field name="model">ptr.inventaire</field>
+            <field name="arch" type="xml">
+            <search string="Search Orders">
+                <filter string="Brouillant" icon="terp-accessories-archiver" domain="[('state','=','draft')]"/>
+                <filter string="RPV" icon="terp-accessories-archiver" domain="[('state','=','redaction_pv_lancement')]"/>
+                <filter string="PVO et DI" icon="terp-accessories-archiver" domain="[('state','in',('demarrage_inventaire','pv_reunion_ouverture'))]" />
+                <filter string="Diffusion RPE" icon="terp-accessories-archiver"  domain="[('state','=','diffusion_rpe')]"/>
+                <separator orientation="horizontal"/>
+                <filter string="Nom d inventaire" icon="terp-project" domain="[]" context="{'group_by':'name'}"/>
+                <filter string="Debut" icon="terp-project" domain="[]" context="{'group_by':'date_inv_dec'}"/>
+                <filter string="Duree" icon="terp-project" domain="[]" context="{'group_by':'duree'}"/>
+            </search>
+            </field>
+        
+        </record>
+
+ 
+       <menuitem name="Inventaire" id="section_main_menu_inventaire" parent="main_menu_etablissement" />
+        <menuitem name="Menu inventaire" id="real_menu_inventaire" parent="section_main_menu_inventaire" action="action_inventaire_seq"/>
+		
+    </data>
+</openerp>

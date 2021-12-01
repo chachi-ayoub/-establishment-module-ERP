@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp> 
+        <data> 
+        
+    <menuitem id="main_menu_categoriepersonnel" name="Devoir libre"/> 
+    
+    <record id="ptr_categorie_personnel_form_view" model="ir.ui.view"> 
+    <field name="name">ptr.categoriepersonnel.form</field> 
+    <field name="model">ptr.categoriepersonnel</field> 
+    <field name="arch" type="xml"> 
+        <form string="categorie personnel" version="7.0"> 
+    <sheet> 
+    <notebook > 
+      <page string="Infos Categorie Personnel"> 
+      <group> 
+       <field name="code"/>
+       <field name="libelle"/> 
+        
+       </group> 
+      </page> 
+     </notebook> 
+    </sheet> 
+      </form> 
+         </field> 
+  </record> 
+ <record model="ir.ui.view" id="ptr.categorie_personnel_tree"> 
+  <field name="name">ptr.categoriepersonnel.tree</field> 
+  <field name="model">ptr.categoriepersonnel</field> 
+  <field name="type">tree</field> 
+  <field name="arch" type="xml"> 
+   <tree string="Infos Categorie Personnel"> 
+        <field name="code"/>
+        <field name="libelle"/> 
+   </tree> 
+  </field> 
+ </record>  
+ <record model="ir.actions.act_window" id="action_categorie_personnel_seq"> 
+  <field name="name">action categorie personnel</field> 
+  <field name="res_model">ptr.categoriepersonnel</field> 
+  <field name="view_type">form</field> 
+ <field name="view_mode">tree,form</field> 
+</record> 
+
+<menuitem name="Menu des categorie personnels" id="section_main_menu_categorie_personnel" parent="main_menu_etablissement" /> 
+<menuitem name="Categorie des personnels" id="real_menu_categorie_personnel" parent="section_main_menu_categorie_personnel" action="action_categorie_personnel_seq"/> 
+ 
+ </data> 
+</openerp> 

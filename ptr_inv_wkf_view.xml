@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp> 
+    <data> 
+        <record model="workflow" id="ptr_inv_wkf" > 
+            <field name="name">ptr.inventaire.wkf</field> 
+            <field name="osv">ptr.inventaire</field> 
+            <field name="on_create">True</field> 
+        </record>
+
+        <!-- Activity-->
+        <record model="workflow.activity" id="ptr_inv_wkf_act_draft">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="flow_start">True</field>
+            <field name="name">Draft</field>
+            <field name="kind">function</field>
+            <field name="action">_draft_func()</field>
+        </record>
+         <!-- Activity-->
+        <record model="workflow.activity" id="ptr_inv_wkf_act_redaction_pv_lancement">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">Redaction du pv de lancement</field>
+            <field name="kind">function</field>
+            <field name="action">_redaction_pv_lancement_func()</field>
+        </record>
+        <record model="workflow.activity" id="ptr_inv_wkf_signature_courrier">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">Validation et signature du courrier</field>
+            <field name="kind">function</field>
+            <field name="action">_signature_courrier_func()</field>
+        </record>
+        <record model="workflow.activity" id="ptr_inv_wkf_designation_equipe">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">Designation de l equipe d inventaire</field>
+            <field name="kind">function</field>
+            <field name="action">_designation_equipe_func()</field>
+        </record>
+        <record model="workflow.activity" id="ptr_inv_wkf_maj_plan_action">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">MAJ plan d action</field>
+            <field name="kind">function</field>
+            <field name="action">_maj_plan_action_func()</field>
+        </record> -->
+        <record model="workflow.activity" id="ptr_inv_wkf_diffusion_rpe">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">Diffusion RPE</field>
+            <field name="kind">function</field>
+            <field name="action">_diffusion_rpe_func()</field>
+        </record>
+        <record model="workflow.activity" id="ptr_inv_wkf_pv_reunion_ouverture">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">PV de reunion ouverture</field>
+            <field name="kind">function</field>
+            <field name="action">_pv_reunion_ouverture_func()</field>
+        </record>
+        <record model="workflow.activity" id="ptr_inv_wkf_demarrage_inventaire">
+            <field name="wkf_id" ref="ptr_inv_wkf" />
+            <field name="name">Demarrage inventaire</field>
+            <field name="kind">function</field>
+            <field name="action">_demarrage_inventaire_func()</field>
+        </record>
+
+
+
+
+
+
+
+         <!--  transitions -->
+        <record model="workflow.transition" id="ptr_inv_wkf_t1">
+            <field name="act_from" ref="ptr_inv_wkf_act_draft" />
+            <field name="act_to" ref="ptr_inv_wkf_act_redaction_pv_lancement" />
+            <field name="signal">redaction_pv_lancement</field>
+        </record>
+        <record model="workflow.transition" id="ptr_inv_wkf_t2">
+            <field name="act_from" ref="ptr_inv_wkf_act_redaction_pv_lancement" />
+            <field name="act_to" ref="ptr_inv_wkf_signature_courrier" />
+            <field name="signal">signature_courrier</field>
+        </record>
+        <record model="workflow.transition" id="ptr_inv_wkf_t3">
+            <field name="act_from" ref="ptr_inv_wkf_signature_courrier" />
+            <field name="act_to" ref="ptr_inv_wkf_designation_equipe" />
+            <field name="signal">designation_equipe</field>
+        </record>
+        <record model="workflow.transition" id="ptr_inv_wkf_t4">
+            <field name="act_from" ref="ptr_inv_wkf_designation_equipe" />
+            <field name="act_to" ref="ptr_inv_wkf_maj_plan_action" />
+            <field name="signal">maj_plan_action</field>
+        </record>
+        <record model="workflow.transition" id="ptr_inv_wkf_t5">
+            <field name="act_from" ref="ptr_inv_wkf_maj_plan_action" />
+            <field name="act_to" ref="ptr_inv_wkf_diffusion_rpe" />
+            <field name="signal">diffusion_rpe</field>
+        </record>
+        <record model="workflow.transition" id="ptr_inv_wkf_t6">
+            <field name="act_from" ref="ptr_inv_wkf_diffusion_rpe" />
+            <field name="act_to" ref="ptr_inv_wkf_pv_reunion_ouverture" />
+            <field name="signal">pv_reunion_ouverture</field>
+        </record>
+           <record model="workflow.transition" id="ptr_inv_wkf_t7">
+            <field name="act_from" ref="ptr_inv_wkf_pv_reunion_ouverture" />
+            <field name="act_to" ref="ptr_inv_wkf_demarrage_inventaire" />
+            <field name="signal">demarrage_inventaire</field>
+        </record>
+   
+    </data> 
+</openerp> 

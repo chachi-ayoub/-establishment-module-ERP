@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp> 
+        <data> 
+        
+    <menuitem id="main_menu_local" name="Patrimoines"/> 
+    
+    <record id="ptr_local_form_view" model="ir.ui.view"> 
+    <field name="name">ptr.local.form</field> 
+    <field name="model">ptr.local</field> 
+    <field name="arch" type="xml"> 
+        <form string="local" version="7.0"> 
+    <sheet> 
+    <notebook > 
+      <page string="Infos Locaux"> 
+      <group>
+     
+       <field name="code"/>
+       <field name="designation"/> 
+       <field name="crocquis"/> 
+       <field name="superficie"/> 
+       <field name="capacite_acceuil"/> 
+       <field name="fiche_immeuble"/> 
+       <field name="fiche_etage"/> 
+      <field name="fiche_local"/>  
+      <field name="departement"/> 
+      <field name="responsable"/> 
+
+        
+       </group> 
+      </page> 
+     </notebook> 
+    </sheet> 
+      </form> 
+         </field> 
+  </record> 
+ <record model="ir.ui.view" id="ptr.local_tree"> 
+  <field name="name">ptr.local.tree</field> 
+  <field name="model">ptr.local</field> 
+  <field name="type">tree</field> 
+  <field name="arch" type="xml"> 
+   <tree string="Infos Locaux"> 
+        
+       <field name="code"/>
+       <field name="designation"/> 
+       <field name="crocquis"/> 
+       <field name="superficie"/> 
+       <field name="capacite_acceuil"/> 
+       <field name="fiche_immeuble"/> 
+       <field name="fiche_etage"/> 
+      <field name="fiche_local"/>  
+      <field name="departement"/> 
+      <field name="responsable"/> 
+   
+   </tree> 
+  </field> 
+ </record>  
+  <record id="ptr_local_graph" model="ir.ui.view">
+    <field name="name">ptr.local.graph</field>
+    <field name="model">ptr.local</field>
+    <field name="arch" type="xml">
+    <graph string="Statistique des locaux" type="bar">
+    <field name="designation" />
+    <field name="superficie" operator="+"/>
+    </graph>
+    </field>
+</record>
+ <record model="ir.actions.act_window" id="action_local_seq"> 
+  <field name="name">action local</field> 
+  <field name="res_model">ptr.local</field> 
+  <field name="view_type">form</field> 
+ <field name="view_mode">tree,form,graph</field> 
+</record> 
+
+<menuitem name="Menu des Locaux" id="section_main_menu_local" parent="main_menu_etablissement" /> 
+<menuitem name="Local" id="real_menu_local" parent="section_main_menu_local" action="action_local_seq"/> 
+ 
+ </data> 
+</openerp> 

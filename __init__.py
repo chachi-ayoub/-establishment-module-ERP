@@ -1,0 +1,1 @@
+import ptr_etablissement, ptr_categoriepersonnel,ptr_departement,ptr_inventaire,ptr_local,ptr_responsable,ptr_typeptrgeo

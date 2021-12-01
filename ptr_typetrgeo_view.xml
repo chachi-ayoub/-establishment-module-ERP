@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp> 
+        <data> 
+        
+    <menuitem id="main_menu_typeptrgeo" name="Patrimoines"/> 
+    
+    <record id="ptr_typeptrgeo_form_view" model="ir.ui.view"> 
+    <field name="name">ptr.typeptrgeo.form</field> 
+    <field name="model">ptr.typeptrgeo</field> 
+    <field name="arch" type="xml"> 
+        <form string="Type partimoine geo" version="7.0"> 
+    <sheet> 
+    <notebook > 
+      <page string="Infos typeptrgeo"> 
+      <group>
+        <field name="code"/>
+        <field name="libelle"/> 
+       </group> 
+      </page> 
+     </notebook> 
+    </sheet> 
+      </form> 
+         </field> 
+  </record> 
+ <record model="ir.ui.view" id="ptr.typeptrgeo_tree"> 
+  <field name="name">ptr.typeptrgeo.tree</field> 
+  <field name="model">ptr.typeptrgeo</field> 
+  <field name="type">tree</field> 
+  <field name="arch" type="xml"> 
+   <tree string="Infos typeptrgeo"> 
+        <field name="code"/>
+        <field name="libelle"/> 
+   </tree> 
+  </field> 
+ </record>  
+
+ <record model="ir.actions.act_window" id="action_typeptrgeo_seq"> 
+  <field name="name">action typeptrgeo</field> 
+  <field name="res_model">ptr.typeptrgeo</field> 
+  <field name="view_type">form</field> 
+ <field name="view_mode">tree,form</field> 
+</record> 
+
+<menuitem name="Menu des type ptr geo" id="section_main_menu_typeptrgeo" parent="main_menu_etablissement" /> 
+<menuitem name="Type patrimoine geo" id="real_menu_typeptrgeo" parent="section_main_menu_typeptrgeo" action="action_typeptrgeo_seq"/> 
+ 
+ </data> 
+</openerp> 

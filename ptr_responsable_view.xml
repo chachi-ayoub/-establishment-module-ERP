@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp> 
+        <data> 
+        
+    <menuitem id="main_menu_responsable" name="Patrimoines"/> 
+    
+    <record id="ptr_responsable_form_view" model="ir.ui.view"> 
+    <field name="name">ptr.responsable.form</field> 
+    <field name="model">ptr.responsable</field> 
+    <field name="arch" type="xml"> 
+        <form string="responsable" version="7.0"> 
+    <sheet> 
+    <notebook > 
+      <page string="Infos responsable"> 
+      <group>
+       <field name="matricule"/>
+       <field name="name"/> 
+       <field name="prenom"/> 
+       <field name="fonction"/> 
+       <field name="tel"/> 
+       <field name="faxe"/> 
+       <field name="email"/> 
+       <field name="local_id"/> 
+       <field name="categoriepersonnel"/> 
+       </group> 
+      </page> 
+     </notebook> 
+    </sheet> 
+      </form> 
+         </field> 
+  </record> 
+ <record model="ir.ui.view" id="ptr.responsable_tree"> 
+  <field name="name">ptr.responsable.tree</field> 
+  <field name="model">ptr.responsable</field> 
+  <field name="type">tree</field> 
+  <field name="arch" type="xml"> 
+   <tree string="Infos Responsable"> 
+        <field name="matricule"/>
+       <field name="name"/> 
+       <field name="prenom"/> 
+       <field name="fonction"/> 
+       <field name="tel"/> 
+       <field name="faxe"/> 
+       <field name="email"/> 
+       <field name="local_id"/> 
+       <field name="categoriepersonnel"/> 
+       
+   </tree> 
+  </field> 
+ </record>  
+
+ <record model="ir.actions.act_window" id="action_responsable_seq"> 
+  <field name="name">action responsable</field> 
+  <field name="res_model">ptr.responsable</field> 
+  <field name="view_type">form</field> 
+ <field name="view_mode">tree,form</field> 
+</record> 
+
+<menuitem name="Menu des Responsable" id="section_main_menu_responsable" parent="main_menu_etablissement" /> 
+<menuitem name="Responsable" id="real_menu_responsable" parent="section_main_menu_responsable" action="action_responsable_seq"/> 
+ 
+ </data> 
+</openerp> 

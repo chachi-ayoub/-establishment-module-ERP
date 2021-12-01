@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<openerp> 
+        <data> 
+        
+    <menuitem id="main_menu_departement" name="Devoire libre (Ptrimoins)"/> 
+    
+    <record id="ptr_departement_form_view" model="ir.ui.view"> 
+    <field name="name">ptr.departement.form</field> 
+    <field name="model">ptr.departement</field> 
+    <field name="arch" type="xml"> 
+        <form string="departement" version="7.0"> 
+    <sheet> 
+    <notebook > 
+      <page string="Infos departement"> 
+      <group> 
+       <field name="name"/> 
+       <field name="code"/> 
+        <field name="adresse"/> 
+        <field name="fixe"/> 
+        <field name="faxe"/> 
+        <field name="responsable"/> 
+        <field name="idetablissement"/> 
+       </group> 
+      </page> 
+      <page string="Locaux"> 
+       <group> 
+        <field name="local_ids"/> 
+       </group> 
+      </page> 
+     </notebook> 
+    </sheet> 
+      </form> 
+         </field> 
+  </record> 
+ <record model="ir.ui.view" id="ptr.departement_tree"> 
+  <field name="name">ptr.departement.tree</field> 
+  <field name="model">ptr.departement</field> 
+  <field name="type">tree</field> 
+  <field name="arch" type="xml"> 
+   <tree string="Infos departement"> 
+    <field name="name"/> 
+    <field name="code"/> 
+    <field name="adresse"/> 
+    <field name="fixe"/> 
+   <field name="faxe"/> 
+    <field name="responsable"/> 
+   </tree> 
+  </field> 
+ </record>  
+ <record model="ir.actions.act_window" id="action_departement_seq"> 
+  <field name="name">action departement</field> 
+  <field name="res_model">ptr.departement</field> 
+  <field name="view_type">form</field> 
+ <field name="view_mode">tree,form</field> 
+</record> 
+
+<menuitem name="Menu des Departements" id="section_main_menu_departement" parent="main_menu_etablissement" /> 
+<menuitem name="Departements" id="real_menu_departement" parent="section_main_menu_departement" action="action_departement_seq"/> 
+ 
+ </data> 
+</openerp> 
