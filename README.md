@@ -1,6 +1,6 @@
 # -establishment-module-ERP
-Creation of an etablishment module in OpenErp 7 that manage 
-+ The Etablishment
+Creation of an establishment module in OpenErp 7 that manages
++ The Establishment
 + Departements MENU 
 + Personal categories menu
 + Locals menu
